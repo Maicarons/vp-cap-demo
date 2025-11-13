@@ -1,67 +1,73 @@
 #!/usr/bin/env bash
 set -e
 
-echo "🔍 Checking environment..."
-
-# ========== 检查 Java ==========
-if ! command -v java &>/dev/null; then
-  echo "☕ Installing OpenJDK 17..."
-  sudo apt update
-  sudo apt install -y openjdk-17-jdk
-else
-  echo "☕ Java found: $(java -version 2>&1 | head -n 1)"
+echo "🔍 [1/9] Checking Node.js and npm..."
+if ! command -v node &> /dev/null; then
+  echo "❌ Node.js not found. Installing..."
+  curl -fsSL https://deb.nodesource.com/setup_22.x | sudo -E bash -
+  sudo apt-get install -y nodejs
 fi
+echo "✅ Node.js: $(node -v)"
+echo "✅ npm: $(npm -v)"
 
-# ========== 检查 Gradle ==========
-if ! command -v gradle &>/dev/null; then
-  echo "📦 Installing Gradle..."
-  sudo apt install -y gradle
-else
-  echo "📦 Gradle found: $(gradle -v | head -n 1)"
+echo "🔍 [2/9] Checking Bun..."
+if ! command -v bun &> /dev/null; then
+  echo "❌ Bun not found. Installing..."
+  curl -fsSL https://bun.sh/install | bash
+  export PATH="$HOME/.bun/bin:$PATH"
 fi
+echo "✅ Bun: $(bun --version)"
 
-# ========== 检查 Android SDK ==========
-ANDROID_HOME="$HOME/android-sdk"
-if [ ! -d "$ANDROID_HOME" ]; then
-  echo "📱 Installing Android SDK..."
-  sudo apt install -y unzip wget
-  mkdir -p "$ANDROID_HOME/cmdline-tools"
-  cd "$ANDROID_HOME/cmdline-tools"
-  wget https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -O tools.zip
-  unzip tools.zip -d latest
-  rm tools.zip
-  export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
-  yes | sdkmanager --licenses
-  sdkmanager "platform-tools" "platforms;android-34" "build-tools;34.0.0"
-else
-  echo "📱 Android SDK found at $ANDROID_HOME"
-  export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$PATH"
+echo "🔍 [3/9] Checking Java..."
+if ! command -v java &> /dev/null; then
+  echo "❌ Java not found. Installing OpenJDK 17..."
+  sudo apt-get update -y
+  sudo apt-get install -y openjdk-17-jdk
 fi
+echo "✅ Java: $(java -version 2>&1 | head -n 1)"
 
-# ========== 检查 Capacitor Android 工程 ==========
-if [ ! -d "android" ]; then
-  echo "⚙️ Initializing Capacitor Android project..."
-  bunx cap add android
-else
-  echo "⚙️ Android project found."
+echo "🔍 [4/9] Checking Android SDK..."
+ANDROID_SDK_ROOT="$HOME/android-sdk"
+if [ ! -d "$ANDROID_SDK_ROOT" ]; then
+  echo "❌ Android SDK not found. Installing..."
+  mkdir -p "$ANDROID_SDK_ROOT"
+  cd "$ANDROID_SDK_ROOT"
+  curl -s https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
+  unzip -q cmdline-tools.zip -d cmdline-tools
+  rm cmdline-tools.zip
+  export PATH="$ANDROID_SDK_ROOT/cmdline-tools/bin:$PATH"
+  yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager --licenses
+  yes | $ANDROID_SDK_ROOT/cmdline-tools/bin/sdkmanager "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 fi
+export ANDROID_SDK_ROOT="$HOME/android-sdk"
+export PATH="$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/35.0.0:$PATH"
+echo "✅ Android SDK ready"
 
-# ========== 同步 VitePress 资源 ==========
-echo "📦 Syncing web build to Android..."
-bun run docs:build
-bunx cap sync android
+echo "🔍 [5/9] Checking Gradle..."
+if ! command -v gradle &> /dev/null; then
+  echo "❌ Gradle not found. Installing..."
+  sudo apt-get install -y gradle
+fi
+echo "✅ Gradle: $(gradle -v | grep Gradle)"
 
-# ========== 构建 APK ==========
-echo "🚀 Building APK..."
+echo "🔍 [6/9] Installing project dependencies..."
+bun install || npm install
+
+echo "🔍 [7/9] Initializing Capacitor..."
+if [ ! -f "capacitor.config.ts" ] && [ ! -f "capacitor.config.json" ]; then
+  npx cap init vp-cap-demo com.example.vpcapdemo --web-dir=dist --yes
+fi
+npm install @capacitor/core @capacitor/cli --save
+npx cap add android || true
+
+echo "🔍 [8/9] Building VitePress site..."
+bunx vitepress build docs
+
+echo "🔍 [9/9] Syncing and building APK..."
+npx cap sync android
 cd android
 ./gradlew assembleDebug
 
-# ========== 输出 APK 路径 ==========
-APK_PATH=$(find ./app/build/outputs/apk/debug -name "*.apk" | head -n 1)
-if [ -f "$APK_PATH" ]; then
-  echo "✅ APK built successfully:"
-  echo "   $APK_PATH"
-else
-  echo "❌ APK build failed."
-  exit 1
-fi
+APK_PATH=$(find app/build/outputs/apk/debug -name "*.apk" | head -n 1)
+echo "🎉 APK build complete!"
+echo "📦 Path: $APK_PATH"
