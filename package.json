@@ -1,23 +1,34 @@
 {
   "name": "vp-cap-demo",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "vp-cap-demo",
   "type": "module",
-"scripts": {
-  "docs:dev": "vitepress dev docs",
-  "docs:build": "vitepress build docs",
-  "sync": "vitepress build docs && npx cap copy android"
-},
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "scripts": {
+    "docs:dev": "vitepress dev docs",
+    "docs:build": "vitepress build docs",
+    "sync": "vitepress build docs && npx cap copy android"
+  },
+  "keywords": ["vitepress", "capacitor"],
+  "author": "Maicarons",
+  "license": "MIT",
   "dependencies": {
     "@capacitor/android": "^7.4.4",
     "@capacitor/camera": "^7.0.2",
     "@capacitor/cli": "^7.4.4",
     "@capacitor/core": "^7.4.4",
+    "@capacitor/device": "^7.0.2",
+    "@capacitor/geolocation": "^7.1.5",
+    "@capacitor/haptics": "^7.0.2",
+    "@capacitor/local-notifications": "^7.0.3",
+    "@capacitor/network": "^7.0.2",
+    "@capacitor/preferences": "^7.0.2",
+    "markdown-it-abbr": "^2.0.0",
+    "markdown-it-anchor": "^9.2.0",
+    "markdown-it-footnote": "^4.0.0",
+    "markdown-it-mark": "^4.0.0",
+    "markdown-it-mathjax3": "^5.2.0",
     "vitepress": "^1.6.4",
+    "vitepress-sidebar": "^1.33.0",
     "vue": "^3.5.24"
   },
   "devDependencies": {

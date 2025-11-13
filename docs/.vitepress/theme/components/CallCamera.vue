@@ -10,7 +10,7 @@ async function takePhoto() {
       quality: 80,
       resultType: CameraResultType.DataUrl,
     })
-    image.value = photo.dataUrl
+    image.value = photo.dataUrl || null
   } catch (err) {
     console.error('Camera error:', err)
   }
