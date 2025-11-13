@@ -1,0 +1,26 @@
+{
+  "name": "vp-cap-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+"scripts": {
+  "docs:dev": "vitepress dev docs",
+  "docs:build": "vitepress build docs",
+  "sync": "vitepress build docs && npx cap copy android"
+},
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@capacitor/android": "^7.4.4",
+    "@capacitor/camera": "^7.0.2",
+    "@capacitor/cli": "^7.4.4",
+    "@capacitor/core": "^7.4.4",
+    "vitepress": "^1.6.4",
+    "vue": "^3.5.24"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3"
+  }
+}
