@@ -20,10 +20,10 @@ async function load() {
 </script>
 
 <template>
-    <div>
+    <div style="text-align: center; padding: 20px;">
         <input v-model="input" placeholder="Type something..." />
-        <button @click="save">Save</button>
-        <button @click="load">Load</button>
+        <PrimaryButton @click="save">Save</PrimaryButton>
+        <PrimaryButton @click="load">Load</PrimaryButton>
 
         <p>Stored value: {{ stored }}</p>
     </div>

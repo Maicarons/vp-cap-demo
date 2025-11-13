@@ -10,8 +10,8 @@ async function loadInfo() {
 </script>
 
 <template>
-    <div>
-        <button @click="loadInfo">Get Device Info</button>
-        <pre v-if="info">{{ info }}</pre>
+    <div style="text-align: center; padding: 20px;">
+        <PrimaryButton @click="loadInfo">Get Device Info</PrimaryButton>
+        <pre style="text-align: left;" v-if="info">{{ info }}</pre>
     </div>
 </template>

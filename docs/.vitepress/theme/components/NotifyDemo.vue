@@ -1,8 +1,8 @@
 <template>
-    <div style="padding: 16px">
+    <div style="text-align: center; padding: 20px;">
         <h3>🔔 Local Notification Demo</h3>
-        <button @click="requestPermission">Request Permission</button>
-        <button @click="sendNotification">Send Notification</button>
+        <PrimaryButton @click="requestPermission">Request Permission</PrimaryButton>
+        <PrimaryButton @click="sendNotification">Send Notification</PrimaryButton>
     </div>
 </template>
 

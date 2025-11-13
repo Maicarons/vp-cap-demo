@@ -23,8 +23,8 @@ onUnmounted(() => {
 </script>
 
 <template>
-    <div>
-        <button @click="loadStatus">Refresh Network Status</button>
-        <pre>{{ status }}</pre>
+    <div style="text-align: center; padding: 20px;">
+        <PrimaryButton @click="loadStatus">Refresh Network Status</PrimaryButton>
+        <pre style="text-align: left;">{{ status }}</pre>
     </div>
 </template>

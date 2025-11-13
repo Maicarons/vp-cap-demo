@@ -19,12 +19,10 @@ async function takePhoto() {
 
 <template>
   <div style="text-align: center; padding: 20px;">
-    <button
-      @click="takePhoto"
-      style="padding: 10px 20px; border: none; background: #42b983; color: white; border-radius: 6px;"
-    >
+    <PrimaryButton
+      @click="takePhoto">
       打开相机
-    </button>
+    </PrimaryButton>
     <div v-if="image" style="margin-top: 20px;">
       <img :src="image" style="width: 100%; border-radius: 8px;" />
     </div>

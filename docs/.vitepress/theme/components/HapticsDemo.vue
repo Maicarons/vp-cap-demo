@@ -7,7 +7,7 @@ async function vibrate() {
 </script>
 
 <template>
-    <div>
-        <button @click="vibrate">Trigger Heavy Vibration</button>
+    <div style="text-align: center; padding: 20px;">
+        <PrimaryButton @click="vibrate">Trigger Heavy Vibration</PrimaryButton>
     </div>
 </template>

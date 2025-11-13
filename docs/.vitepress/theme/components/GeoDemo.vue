@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onMounted, onUnmounted } from 'vue'
 import { Geolocation } from '@capacitor/geolocation'
 
 const pos = ref<any>(null)
 const error = ref<string | null>(null)
-
+let listener: any = null
 async function getLocation() {
     error.value = null
     try {
@@ -17,10 +17,10 @@ async function getLocation() {
 </script>
 
 <template>
-    <div>
-        <button @click="getLocation">Get Current Location</button>
+    <div style="text-align: center; padding: 20px;">
+        <PrimaryButton @click="getLocation">Get Current Location</PrimaryButton>
 
-        <pre v-if="pos">{{ pos }}</pre>
+        <pre style="text-align: left;" v-if="pos">{{ pos }}</pre>
         <p v-if="error" style="color:red">{{ error }}</p>
     </div>
 </template>
