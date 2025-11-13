@@ -64,15 +64,15 @@ echo "✅ Gradle: $(gradle -v | grep Gradle)"
 
 echo "🔍 [6/9] Installing project dependencies..."
 cd "$PROJECT_ROOT"
-bun install || npm install
+bun install
 
 echo "🔍 [7/9] Initializing Capacitor..."
 cd "$PROJECT_ROOT"
 if [ ! -f "capacitor.config.ts" ] && [ ! -f "capacitor.config.json" ]; then
   npx cap init vp-cap-demo com.example.vpcapdemo --web-dir=dist --yes
 fi
-npm install @capacitor/core @capacitor/cli --save
-npx cap add android || true
+bun install @capacitor/core @capacitor/cli --save
+bunx cap add android || true
 
 echo "🔍 [8/9] Building VitePress site..."
 cd "$PROJECT_ROOT"
@@ -80,7 +80,7 @@ bunx vitepress build docs
 
 echo "🔍 [9/9] Syncing and building APK..."
 cd "$PROJECT_ROOT"
-npx cap sync android
+bunx cap sync android
 cd android
 ./gradlew assembleDebug
 
