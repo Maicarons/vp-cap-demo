@@ -23,9 +23,9 @@ echo "✅ Bun: $(bun --version)"
 
 echo "🔍 [3/9] Checking Java..."
 if ! command -v java &> /dev/null; then
-  echo "❌ Java not found. Installing OpenJDK 17..."
+  echo "❌ Java not found. Installing OpenJDK 21..."
   sudo apt-get update -y
-  sudo apt-get install -y openjdk-17-jdk
+  sudo apt-get install -y openjdk-21-jdk
 fi
 echo "✅ Java: $(java -version 2>&1 | head -n 1)"
 
