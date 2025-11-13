@@ -30,27 +30,29 @@ fi
 echo "✅ Java: $(java -version 2>&1 | head -n 1)"
 
 echo "🔍 [4/9] Checking Android SDK..."
-ANDROID_SDK_ROOT="$HOME/android-sdk"
-if [ ! -d "$ANDROID_SDK_ROOT" ]; then
+ANDROID_HOME="$HOME/android-sdk"
+if [ ! -d "$ANDROID_HOME" ]; then
   echo "❌ Android SDK not found. Installing..."
-  mkdir -p "$ANDROID_SDK_ROOT/cmdline-tools"
-  cd "$ANDROID_SDK_ROOT/cmdline-tools"
+  mkdir -p "$ANDROID_HOME/cmdline-tools"
+  cd "$ANDROID_HOME/cmdline-tools"
   curl -s https://dl.google.com/android/repository/commandlinetools-linux-11076708_latest.zip -o cmdline-tools.zip
   unzip -q cmdline-tools.zip
   rm cmdline-tools.zip
 
-  # Fix directory structure for sdkmanager
   if [ -d "cmdline-tools" ]; then
     mv cmdline-tools latest
   fi
 
-  export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$PATH"
+  export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$PATH"
 
-  yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" --licenses
-  yes | "$ANDROID_SDK_ROOT/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
-else
-  export PATH="$ANDROID_SDK_ROOT/cmdline-tools/latest/bin:$ANDROID_SDK_ROOT/platform-tools:$ANDROID_SDK_ROOT/build-tools/35.0.0:$PATH"
+  yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" --licenses
+  yes | "$ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
 fi
+
+export PATH="$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/build-tools/35.0.0:$PATH"
+export ANDROID_HOME
+unset ANDROID_SDK_ROOT
+
 echo "✅ Android SDK ready"
 
 echo "🔍 [5/9] Checking Gradle..."
