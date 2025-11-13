@@ -1,6 +1,9 @@
 #!/usr/bin/env bash
 set -e
 
+echo "🔍 [0/9] Save current directory as project root..."
+PROJECT_ROOT=$(pwd)
+
 echo "🔍 [1/9] Checking Node.js and npm..."
 if ! command -v node &> /dev/null; then
   echo "❌ Node.js not found. Installing..."
@@ -58,9 +61,11 @@ fi
 echo "✅ Gradle: $(gradle -v | grep Gradle)"
 
 echo "🔍 [6/9] Installing project dependencies..."
+cd "$PROJECT_ROOT"
 bun install || npm install
 
 echo "🔍 [7/9] Initializing Capacitor..."
+cd "$PROJECT_ROOT"
 if [ ! -f "capacitor.config.ts" ] && [ ! -f "capacitor.config.json" ]; then
   npx cap init vp-cap-demo com.example.vpcapdemo --web-dir=dist --yes
 fi
@@ -68,9 +73,11 @@ npm install @capacitor/core @capacitor/cli --save
 npx cap add android || true
 
 echo "🔍 [8/9] Building VitePress site..."
+cd "$PROJECT_ROOT"
 bunx vitepress build docs
 
 echo "🔍 [9/9] Syncing and building APK..."
+cd "$PROJECT_ROOT"
 npx cap sync android
 cd android
 ./gradlew assembleDebug
