@@ -1,7 +1,7 @@
 import { CapacitorConfig } from '@capacitor/cli'
 
 const config: CapacitorConfig = {
-  appId: 'cc.maicarons.vpcapdemo',
+  appId: 'com.example.vpcapdemo',
   appName: 'VPCapDemo',
   webDir: 'docs/.vitepress/dist',
 }
