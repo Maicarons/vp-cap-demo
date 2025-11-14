@@ -37,7 +37,8 @@ export default defineConfig({
     nav: [
       { text: '首页', link: '/' },
       { text: '指南', link: '/guide/' },
-      { text: '文档', link: '/docs/' }
+      { text: '功能组件', link: '/feature/' },
+      { text: '关于', link: '/about/' }
     ],
     sidebar: generateSidebar({
       documentRootPath: "docs",

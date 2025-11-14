@@ -5,9 +5,9 @@ A VitePress documentation site integrated with Capacitor for mobile app capabili
 ## Features
 
 - 📱 VitePress documentation framework
-- 📷 Capacitor Camera integration
+- 📷 Capacitor Camera integration and more
 - 🎯 Vue 3 components
-- 🤖 Android APK build support
+- 🤖 Android APK build support and more
 
 ## Project Structure
 
@@ -42,9 +42,6 @@ vp-cap-demo/
 ```bash
 # Install dependencies
 bun install
-
-# Install VitePress, Vue, and Capacitor packages
-bun add vitepress vue @capacitor/core @capacitor/cli @capacitor/android @capacitor/camera
 ```
 
 ### Development
@@ -59,47 +56,18 @@ bun run docs:dev
 ```bash
 # Build documentation
 bun run docs:build
-
 # Build APK (requires Android SDK setup)
 ./build-apk.sh
+# or ./build-apk-local.sh if you have full environments
 ```
 
-## Capacitor Setup
-
-Initialize Capacitor (if not already done):
-
-```bash
-bunx cap init
-```
-
-Add Android platform:
-
-```bash
-bunx cap add android
-```
-
-## Camera Component
-
-The `CallCamera.vue` component provides photo capture functionality using Capacitor's Camera API.
-
-### Usage
-
-```vue
-<template>
-  <CallCamera />
-</template>
-
-<script setup>
-import CallCamera from './components/CallCamera.vue'
-</script>
-```
 
 ## Build APK
 
 Run the build script to generate an Android APK:
 
 ```bash
-./build-apk.sh
+./build-apk.sh # or ./build-apk-local.sh if you have full environments
 ```
 
 The script will:
@@ -115,6 +83,7 @@ The script will:
 - **@capacitor/cli**: Capacitor CLI tools
 - **@capacitor/android**: Android platform support
 - **@capacitor/camera**: Camera plugin
+- more
 
 ## License
 
