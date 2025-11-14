@@ -2,31 +2,28 @@ import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import "./style.css";
-import CallCamera from "./components/CallCamera.vue";
-import PrimaryButton from "./components/PrimaryButton.vue";
-import { Capacitor } from '@capacitor/core';
-import NotifyDemo from './components/NotifyDemo.vue'
-import GeoDemo from './components/GeoDemo.vue'
-import StorageDemo from './components/StorageDemo.vue'
-import HapticsDemo from './components/HapticsDemo.vue'
-import DeviceDemo from './components/DeviceDemo.vue'
-import NetworkDemo from './components/NetworkDemo.vue'
+import { Capacitor } from "@capacitor/core";
+
+// @ts-ignore - import.meta.glob is a Vite API
+const components = import.meta.glob("./components/**/*.vue", { eager: true });
+import BottomBar from "./components/BottomBar.vue";
 
 export default {
   extends: DefaultTheme,
   Layout: () => {
-    return h(DefaultTheme.Layout, null, {});
+    // 在默认布局后渲染 BottomBar（固定在页面底部）
+    return h("div", [h(DefaultTheme.Layout), h(BottomBar)]);
   },
   enhanceApp({ app, router, siteData }) {
-    app.component('CallCamera', CallCamera)
-    app.component('PrimaryButton', PrimaryButton)
-    app.component('NotifyDemo', NotifyDemo)
-    app.component('GeoDemo', GeoDemo)
-    app.component('StorageDemo', StorageDemo)
-    app.component('HapticsDemo', HapticsDemo)
-    app.component('DeviceDemo', DeviceDemo)
-    app.component('NetworkDemo', NetworkDemo)
-    app.config.globalProperties.$Capacitor = Capacitor
- 
+    // 动态注册所有组件
+    for (const [path, module] of Object.entries(components)) {
+      const componentName =
+        path
+          .split("/")
+          .pop()
+          ?.replace(/\.vue$/, "") || "";
+      app.component(componentName, (module as any).default);
+    }
+    app.config.globalProperties.$Capacitor = Capacitor;
   },
 } satisfies Theme;

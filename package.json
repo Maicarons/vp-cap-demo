@@ -6,9 +6,14 @@
   "scripts": {
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
-    "sync": "vitepress build docs && npx cap copy android"
+    "sync": "vitepress build docs && npx cap copy && bunx cap sync",
+    "apk:build": "cd android && ./gradlew assembleDebug && cd ..",
+    "full:build": "bun run sync && bun run apk:build"
   },
-  "keywords": ["vitepress", "capacitor"],
+  "keywords": [
+    "vitepress",
+    "capacitor"
+  ],
   "author": "Maicarons",
   "license": "MIT",
   "dependencies": {
@@ -29,7 +34,8 @@
     "markdown-it-mathjax3": "^5.2.0",
     "vitepress": "^1.6.4",
     "vitepress-sidebar": "^1.33.0",
-    "vue": "^3.5.24"
+    "vue": "^3.5.24",
+    "vue-router": "^4.6.3"
   },
   "devDependencies": {
     "typescript": "^5.9.3"

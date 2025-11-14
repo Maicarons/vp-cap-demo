@@ -202,5 +202,5 @@ async function savePhoto(base64: string) {
 
 ## 下一步
 
-- 查看 [API 参考](/docs/api) 了解更多 Capacitor API
+- 查看 [API 参考](/guide/api/index) 了解更多 Capacitor API
 - 阅读 [Capacitor Camera 官方文档](https://capacitorjs.com/docs/apis/camera)

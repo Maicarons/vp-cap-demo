@@ -111,5 +111,4 @@ A: Capacitor 支持 iOS、Android、Web 和 Electron。
 
 ## 下一步
 
-- 查看 [摄像头功能](/guide/camera) 了解如何使用相机 API
 - 阅读 [官方 Capacitor 文档](https://capacitorjs.com/docs)

@@ -143,3 +143,42 @@
   border-radius: 2px;
   transition: background-color 0.25s;
 }
+
+/* 为移动端底部导航预留空间，避免内容被遮挡 */
+@media (max-width: 639px) {
+  .theme-default-content,
+  .vp-doc {
+    padding-bottom: 80px !important;
+  }
+}
+
+/* Dark theme support for BottomBar: use system preference and common theme classes */
+@media (prefers-color-scheme: dark) {
+  .vp-bottombar {
+    background: rgba(6, 10, 13, 0.85);
+    border-top-color: rgba(255, 255, 255, 0.06);
+    color: var(--vp-c-text-1, #ddd);
+  }
+  .vp-bottombar-item {
+    color: var(--vp-c-text-1, #ddd);
+  }
+  .vp-bottombar-item.active {
+    color: var(--vp-c-brand-1, #7dd3fc);
+  }
+}
+
+/* Also support VitePress/theme toggled dark class */
+.theme-dark .vp-bottombar,
+.vp-theme-dark .vp-bottombar {
+  background: rgba(6, 10, 13, 0.85);
+  border-top-color: rgba(255, 255, 255, 0.06);
+  color: var(--vp-c-text-1, #ddd);
+}
+.theme-dark .vp-bottombar-item,
+.vp-theme-dark .vp-bottombar-item {
+  color: var(--vp-c-text-1, #ddd);
+}
+.theme-dark .vp-bottombar-item.active,
+.vp-theme-dark .vp-bottombar-item.active {
+  color: var(--vp-c-brand-1, #7dd3fc);
+}

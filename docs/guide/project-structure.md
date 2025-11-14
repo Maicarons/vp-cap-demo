@@ -9,7 +9,7 @@ vp-cap-demo/
 ├── docs/                              # VitePress 文档源
 │   ├── index.md                      # 首页（Hero 布局）
 │   ├── guide/                        # 指南目录
-│   │   ├── getting-started.md       # 快速开始
+│   │   ├── quick.md       # 快速开始
 │   │   ├── capacitor.md             # Capacitor 配置
 │   │   └── camera.md                # 摄像头功能
 │   ├── docs/                         # 文档目录
@@ -20,7 +20,8 @@ vp-cap-demo/
 │       └── theme/
 │           ├── index.ts             # 主题入口
 │           └── components/
-│               └── CallCamera.vue   # 相机组件
+│               ├── CallCamera.vue   # 相机组件
+│               └── more...
 │
 ├── public/                            # 静态资源
 │   ├── logo.svg                     # 网站 Logo
@@ -58,41 +59,6 @@ vp-cap-demo/
 └── .gitignore                       # Git 忽略文件
 ```
 
-## 核心文件说明
-
-### 配置文件
-
-| 文件 | 用途 |
-|------|------|
-| `capacitor.config.ts` | Capacitor 配置，定义应用信息和平台特定设置 |
-| `vite.config.ts` | Vite 打包配置，控制构建行为 |
-| `package.json` | 项目依赖、脚本命令和元数据 |
-| `docs/.vitepress/config.ts` | VitePress 文档配置，定义导航、侧边栏等 |
-
-### 文档文件
-
-| 目录 | 用途 |
-|------|------|
-| `docs/` | VitePress 文档源文件（Markdown） |
-| `docs/guide/` | 入门指南和教程 |
-| `docs/docs/` | API 文档和参考 |
-| `docs/.vitepress/` | VitePress 配置和主题 |
-
-### 组件文件
-
-| 文件 | 用途 |
-|------|------|
-| `docs/.vitepress/theme/index.ts` | 主题入口，注册全局组件 |
-| `docs/.vitepress/theme/components/CallCamera.vue` | 相机功能组件 |
-
-### 脚本文件
-
-| 文件 | 用途 |
-|------|------|
-| `build-apk.sh` | 自动化 APK 构建脚本 |
-| `android/gradlew` | Android 构建工具（Linux/Mac） |
-| `android/gradlew.bat` | Android 构建工具（Windows） |
-
 ## 开发工作流
 
 ```
@@ -114,21 +80,6 @@ bunx cap sync (同步到 Android)
 ./build-apk.sh (构建 APK)
     ↓
 android/*.apk (生成的应用)
-```
-
-## 忽略文件
-
-`.gitignore` 应包含：
-
-```
-node_modules/
-dist/
-.DS_Store
-android/.gradle/
-android/.idea/
-android/app/build/
-*.log
-*.local
 ```
 
 ## 环境变量
@@ -192,5 +143,5 @@ app.component('MyComponent', MyComponent)
 
 ## 下一步
 
-- 查看 [快速开始](/guide/getting-started) 开始开发
-- 阅读 [API 参考](/docs/api) 了解可用的 API
+- 查看 [快速开始](/guide/quick/index) 开始开发
+- 阅读 [API 参考](/guide/api/index) 了解可用的 API

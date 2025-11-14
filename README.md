@@ -20,7 +20,8 @@ vp-cap-demo/
 │     └─ theme/
 │        ├─ index.ts              # Theme configuration
 │        └─ components/
-│           └─ CallCamera.vue     # Camera component
+│           ├─ CallCamera.vue     # Camera component
+│           └─ more...
 ├─ android/                       # Android project
 ├─ package.json
 ├─ capacitor.config.ts
@@ -61,15 +62,6 @@ bun run docs:build
 # or ./build-apk-local.sh if you have full environments
 ```
 
-
-## Build APK
-
-Run the build script to generate an Android APK:
-
-```bash
-./build-apk.sh # or ./build-apk-local.sh if you have full environments
-```
-
 The script will:
 1. Build the VitePress documentation
 2. Prepare Capacitor assets
@@ -83,7 +75,7 @@ The script will:
 - **@capacitor/cli**: Capacitor CLI tools
 - **@capacitor/android**: Android platform support
 - **@capacitor/camera**: Camera plugin
-- more
+- more...
 
 ## License
 
@@ -92,3 +84,11 @@ MIT
 ## Support
 
 For issues and questions, please check the documentation or create an issue in the repository.
+
+## Why
+
+1. Why vitepress?
+
+no why
+
+2. Why 
