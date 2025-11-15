@@ -41,10 +41,10 @@ Waiting for the debugger to disconnect...
 $ cd android && ./gradlew assembleDebug && cd ..
 
 > Configure project :app
-WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+
 
 > Configure project :capacitor-cordova-android-plugins
-WARNING: Using flatDir should be avoided because it doesn't support any meta-data formats.
+
 
 BUILD SUCCESSFUL in 4s
 276 actionable tasks: 25 executed, 251 up-to-date
