@@ -19,6 +19,8 @@
     "types": ["vite/client", "element-plus/global"]
   },
   "include": [
+    "docs/auto-imports.d.ts",
+    "docs/components.d.ts",
     "docs/**/*.ts",
     "docs/**/*.d.ts",
     "docs/**/*.vue",

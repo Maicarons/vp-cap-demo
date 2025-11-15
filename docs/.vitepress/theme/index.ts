@@ -1,4 +1,3 @@
-import { h } from "vue";
 import type { Theme } from "vitepress";
 import DefaultTheme from "vitepress/theme";
 import "./style.css";
@@ -11,10 +10,6 @@ import BottomBar from "./components/BottomBar.vue";
 
 import "element-plus/dist/index.css";
 import "element-plus/theme-chalk/dark/css-vars.css";
-import ElementPlus, {
-  ID_INJECTION_KEY,
-  ZINDEX_INJECTION_KEY,
-} from "element-plus";
 
 import "virtual:uno.css";
 
@@ -25,9 +20,6 @@ export default {
     return h("div", [h(DefaultTheme.Layout), h(BottomBar)]);
   },
   enhanceApp({ app, router, siteData }) {
-    app.use(ElementPlus as any);
-    app.provide(ID_INJECTION_KEY, { prefix: 1024, current: 0 });
-    app.provide(ZINDEX_INJECTION_KEY, { current: 0 });
     // 动态注册所有组件
     for (const [path, module] of Object.entries(components)) {
       const componentName =

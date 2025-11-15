@@ -36,6 +36,8 @@ export default defineConfig({
   vite: {
     plugins: [
       AutoImport({
+        imports: ["vue", "vitepress"],
+        dts: true,
         resolvers: [ElementPlusResolver()],
       }),
       Components({

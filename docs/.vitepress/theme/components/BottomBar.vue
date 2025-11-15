@@ -13,7 +13,6 @@
 </template>
 
 <script setup lang="ts">
-import { useRoute, useRouter } from "vitepress";
 import { bottomNavItems } from "../config/bottomNavItems";
 
 const route = useRoute();
