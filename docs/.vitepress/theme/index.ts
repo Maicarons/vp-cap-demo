@@ -6,7 +6,17 @@ import { Capacitor } from "@capacitor/core";
 
 // @ts-ignore - import.meta.glob is a Vite API
 const components = import.meta.glob("./components/**/*.vue", { eager: true });
+const view = import.meta.glob("./view/**/*.vue", { eager: true });
 import BottomBar from "./components/BottomBar.vue";
+
+import "element-plus/dist/index.css";
+import "element-plus/theme-chalk/dark/css-vars.css";
+import ElementPlus, {
+  ID_INJECTION_KEY,
+  ZINDEX_INJECTION_KEY,
+} from "element-plus";
+
+import "virtual:uno.css";
 
 export default {
   extends: DefaultTheme,
@@ -15,8 +25,19 @@ export default {
     return h("div", [h(DefaultTheme.Layout), h(BottomBar)]);
   },
   enhanceApp({ app, router, siteData }) {
+    app.use(ElementPlus as any);
+    app.provide(ID_INJECTION_KEY, { prefix: 1024, current: 0 });
+    app.provide(ZINDEX_INJECTION_KEY, { current: 0 });
     // 动态注册所有组件
     for (const [path, module] of Object.entries(components)) {
+      const componentName =
+        path
+          .split("/")
+          .pop()
+          ?.replace(/\.vue$/, "") || "";
+      app.component(componentName, (module as any).default);
+    }
+    for (const [path, module] of Object.entries(view)) {
       const componentName =
         path
           .split("/")

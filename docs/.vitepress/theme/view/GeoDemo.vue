@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref } from 'vue'
 import { Geolocation } from '@capacitor/geolocation'
+import { ElButton, ElCard, ElAlert } from 'element-plus'
 
 const pos = ref<any>(null)
 const error = ref<string | null>(null)
-let listener: any = null
+
 async function getLocation() {
     error.value = null
     try {
@@ -18,9 +19,11 @@ async function getLocation() {
 
 <template>
     <div style="text-align: center; padding: 20px;">
-        <PrimaryButton @click="getLocation">Get Current Location</PrimaryButton>
+        <ElButton type="primary" @click="getLocation">Get Current Location</ElButton>
 
-        <pre style="text-align: left;" v-if="pos">{{ pos }}</pre>
-        <p v-if="error" style="color:red">{{ error }}</p>
+        <ElCard v-if="pos" style="margin-top: 20px; text-align: left;">
+          <pre>{{ pos }}</pre>
+        </ElCard>
+        <ElAlert v-if="error" :title="error" type="error" show-icon style="margin-top: 20px;" />
     </div>
 </template>

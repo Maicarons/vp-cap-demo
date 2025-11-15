@@ -44,7 +44,13 @@ bun run docs:dev
 ## 编译应用
 
 ```bash
-bun run full:build
+bun run full:build # 懒人版
+# or
+vitepress build docs
+npx cap copy
+bunx cap sync
+cd android 
+./gradlew assembleDebug
 ```
 
 ## 获取帮助

@@ -1,16 +1,20 @@
-import { defineConfig } from 'vitepress'
+import { defineConfig } from "vitepress";
 import markdownItAnchor from "markdown-it-anchor";
 import markdownItMark from "markdown-it-mark";
 import markdownItAbbr from "markdown-it-abbr";
 import markdownItFootnote from "markdown-it-footnote";
 import { generateSidebar } from "vitepress-sidebar";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import UnoCSS from "unocss/vite";
 
 export default defineConfig({
-  title: 'VP + Capacitor Demo',
-  description: 'Markdown 驱动的移动原生应用框架',
+  title: "VP + Capacitor Demo",
+  description: "Markdown 驱动的移动原生应用框架",
   head: [
-    ['link', { rel: 'icon', href: '/favicon.svg' }],
-    ['meta', { name: 'theme-color', content: '#4f46e5' }]
+    ["link", { rel: "icon", href: "/favicon.svg" }],
+    ["meta", { name: "theme-color", content: "#4f46e5" }],
   ],
   lang: "zh-CN",
   markdown: {
@@ -29,16 +33,27 @@ export default defineConfig({
       md.use(markdownItMark).use(markdownItAbbr).use(markdownItFootnote);
     },
   },
+  vite: {
+    plugins: [
+      AutoImport({
+        resolvers: [ElementPlusResolver()],
+      }),
+      Components({
+        resolvers: [ElementPlusResolver()],
+      }),
+      UnoCSS(),
+    ],
+  },
   themeConfig: {
-    logo: '/favicon.svg',
+    logo: "/favicon.svg",
     search: {
-      provider: 'local'
+      provider: "local",
     },
     nav: [
-      { text: '首页', link: '/' },
-      { text: '指南', link: '/guide/' },
-      { text: '功能组件', link: '/feature/' },
-      { text: '关于', link: '/about/' }
+      { text: "首页", link: "/" },
+      { text: "指南", link: "/guide/" },
+      { text: "功能组件", link: "/feature/" },
+      { text: "关于", link: "/about/" },
     ],
     sidebar: generateSidebar({
       documentRootPath: "docs",
@@ -48,7 +63,7 @@ export default defineConfig({
       collapsed: true,
     }),
     socialLinks: [
-      { icon: 'github', link: 'https://github.com/maicarons/vp-cap-demo' }
-    ]
-  }
-})
+      { icon: "github", link: "https://github.com/maicarons/vp-cap-demo" },
+    ],
+  },
+});
